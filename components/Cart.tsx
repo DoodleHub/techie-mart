@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRef } from 'react';
-
 import {
   AiOutlineLeft,
   AiOutlineMinus,
@@ -8,9 +7,11 @@ import {
   AiOutlineShopping,
 } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
+import toast from 'react-hot-toast';
 
 import { useStateContext } from '@/context/StateContext';
 import { urlFor } from '@/sanity/lib/client';
+import getStripe from '@/lib/getStripe';
 
 const Cart = () => {
   const cartRef = useRef<HTMLDivElement>(null);
@@ -22,6 +23,28 @@ const Cart = () => {
     toggleCartItemQuantity,
     onRemove,
   } = useStateContext();
+
+  const handleCheckout = async () => {
+    const stripe = await getStripe();
+
+    if (!stripe) return;
+
+    const response = await fetch('/api/stripe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ cartItems }),
+    });
+
+    if (!response.ok) return;
+
+    const { sessionId } = await response.json();
+
+    toast.loading('Redirecting...');
+
+    stripe.redirectToCheckout({ sessionId });
+  };
 
   return (
     <div className="cart-wrapper" ref={cartRef}>
@@ -101,7 +124,7 @@ const Cart = () => {
               <h3>${totalPrice}</h3>
             </div>
             <div className="btn-container">
-              <button type="button" className="btn" onClick={undefined}>
+              <button type="button" className="btn" onClick={handleCheckout}>
                 Pay with Stripe
               </button>
             </div>

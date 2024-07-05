@@ -1,10 +1,9 @@
-import Head from 'next/head';
 import { Toaster } from 'react-hot-toast';
 
 import './globals.css';
 
 import type { Metadata } from 'next';
-import Wrapper from './wrapper';
+import Wrapper from './Wrapper';
 
 export const metadata: Metadata = {
   title: 'TechieMart',
@@ -18,9 +17,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <title>TechieMart</title>
-      </Head>
       <body>
         <Toaster />
         <Wrapper>{children}</Wrapper>
