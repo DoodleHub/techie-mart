@@ -1,10 +1,17 @@
-import { createContext, useContext, useState } from 'react';
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useState,
+} from 'react';
 import toast from 'react-hot-toast';
 
 import { ProductData } from '@/types';
 
 type StateContext = {
   showCart: boolean;
+  setShowCart: Dispatch<SetStateAction<boolean>>;
   cartItems: ProductData[];
   totalPrice: number;
   totalQuantities: number;
@@ -16,6 +23,7 @@ type StateContext = {
 
 const INITIAL_STATE = {
   showCart: false,
+  setShowCart: () => {},
   cartItems: [],
   totalPrice: 0,
   totalQuantities: 0,
@@ -88,6 +96,7 @@ export const StateContext = ({ children }: StateContextProps) => {
     <Context.Provider
       value={{
         showCart,
+        setShowCart,
         cartItems,
         totalPrice,
         totalQuantities,
