@@ -9,7 +9,7 @@ export type ProductData = {
   details: string;
   _id: string;
   slug: Slug;
-  quantity?: number;
+  quantity: number;
 };
 
 export type Image = {
