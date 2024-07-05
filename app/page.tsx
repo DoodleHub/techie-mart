@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <>
-      {bannerData.length && <HeroBanner heroBanner={bannerData[0]} />}
+      {bannerData.length > 0 && <HeroBanner heroBanner={bannerData[0]} />}
       <div className="products-heading">
         <h2>Best Selling Products</h2>
         <p>Speakers of many variations</p>
@@ -37,7 +37,7 @@ export default function Home() {
           <Product key={product._id} product={product} />
         ))}
       </div>
-      {bannerData.length && <FooterBanner footerBanner={bannerData[0]} />}
+      {bannerData.length > 0 && <FooterBanner footerBanner={bannerData[0]} />}
     </>
   );
 }
