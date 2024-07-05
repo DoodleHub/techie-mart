@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
         const newImage = img
           .replace(
             'image-',
-            'https://cdn.sanity.io/images/vfxfwnaw/production/'
+            'https://cdn.sanity.io/images/9m7gr0ht/production/'
           )
           .replace('-webp', '.webp');
 
