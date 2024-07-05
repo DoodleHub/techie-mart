@@ -24,7 +24,7 @@ type ProductDetailsProps = {
 const ProductDetails = ({ params: { slug } }: ProductDetailsProps) => {
   const [product, setProduct] = useState<ProductData | null>(null);
   const [products, setProducts] = useState<ProductData[]>([]);
-  const { decQty, incQty, qty, onAdd } = useStateContext();
+  const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -41,6 +41,12 @@ const ProductDetails = ({ params: { slug } }: ProductDetailsProps) => {
 
     fetchProductAndBannerData();
   }, [slug]);
+
+  const handleBuyNow = (product: ProductData) => {
+    onAdd(product, qty);
+
+    setShowCart(true);
+  };
 
   if (!product) return null;
 
@@ -92,9 +98,7 @@ const ProductDetails = ({ params: { slug } }: ProductDetailsProps) => {
               <span className="minus" onClick={decQty}>
                 <AiOutlineMinus />
               </span>
-              <span className="num" onClick={() => {}}>
-                {qty}
-              </span>
+              <span className="num">{qty}</span>
               <span className="plus" onClick={incQty}>
                 <AiOutlinePlus />
               </span>
@@ -108,7 +112,11 @@ const ProductDetails = ({ params: { slug } }: ProductDetailsProps) => {
             >
               Add to Cart
             </button>
-            <button type="button" className="buy-now" onClick={() => {}}>
+            <button
+              type="button"
+              className="buy-now"
+              onClick={() => handleBuyNow(product)}
+            >
               Buy Now
             </button>
           </div>
