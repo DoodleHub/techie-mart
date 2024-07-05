@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
       }),
       mode: 'payment',
       success_url: `${origin}/success`,
-      cancel_url: `${origin}/canceled`,
+      cancel_url: `${origin}`,
     };
 
     // Create Checkout Sessions from body params.
