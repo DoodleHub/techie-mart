@@ -10,9 +10,10 @@ import {
 } from 'react-icons/ai';
 
 import { client, urlFor } from '@/sanity/lib/client';
+import { Product } from '@/components';
+import { useStateContext } from '@/context/StateContext';
 
 import { ProductData } from '@/types';
-import { Product } from '@/components';
 
 type ProductDetailsProps = {
   params: {
@@ -23,6 +24,7 @@ type ProductDetailsProps = {
 const ProductDetails = ({ params: { slug } }: ProductDetailsProps) => {
   const [product, setProduct] = useState<ProductData | null>(null);
   const [products, setProducts] = useState<ProductData[]>([]);
+  const { decQty, incQty, qty, onAdd } = useStateContext();
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -87,19 +89,23 @@ const ProductDetails = ({ params: { slug } }: ProductDetailsProps) => {
           <div className="quantity">
             <h3>Quantity:</h3>
             <p className="quantity-desc">
-              <span className="minus" onClick={() => {}}>
+              <span className="minus" onClick={decQty}>
                 <AiOutlineMinus />
               </span>
               <span className="num" onClick={() => {}}>
-                0
+                {qty}
               </span>
-              <span className="plus" onClick={() => {}}>
+              <span className="plus" onClick={incQty}>
                 <AiOutlinePlus />
               </span>
             </p>
           </div>
           <div className="buttons">
-            <button type="button" className="add-to-cart" onClick={() => {}}>
+            <button
+              type="button"
+              className="add-to-cart"
+              onClick={() => onAdd(product, qty)}
+            >
               Add to Cart
             </button>
             <button type="button" className="buy-now" onClick={() => {}}>
