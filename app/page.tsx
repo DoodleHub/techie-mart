@@ -37,7 +37,7 @@ export default function Home() {
           <Product key={product._id} product={product} />
         ))}
       </div>
-      <FooterBanner />
+      {bannerData.length && <FooterBanner footerBanner={bannerData[0]} />}
     </>
   );
 }
