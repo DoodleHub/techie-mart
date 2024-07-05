@@ -18,11 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <div className="layout">
-        <Head>
-          <title>TechieMart</title>
-        </Head>
-      </div>
+      <Head>
+        <title>TechieMart</title>
+      </Head>
       <body>
         <header>
           <Navbar />
