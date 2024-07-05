@@ -1,4 +1,4 @@
-export type Product = {
+export type ProductData = {
   price: number;
   _createdAt: string;
   _rev: string;

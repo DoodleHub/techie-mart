@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from 'react';
 
-import { FooterBanner, HeroBanner } from '@/components';
+import { FooterBanner, HeroBanner, Product } from '@/components';
 import { client } from '@/sanity/lib/client';
 
-import { BannerData, Product } from '@/types';
+import { BannerData, ProductData } from '@/types';
 
 export default function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductData[]>([]);
   const [bannerData, setBannerData] = useState<BannerData[]>([]);
 
   useEffect(() => {
@@ -33,7 +33,9 @@ export default function Home() {
         <p>Speakers of many variations</p>
       </div>
       <div className="products-container">
-        {products?.map((product) => product.name)}
+        {products?.map((product) => (
+          <Product key={product._id} product={product} />
+        ))}
       </div>
       <FooterBanner />
     </>
