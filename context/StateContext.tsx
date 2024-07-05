@@ -21,6 +21,9 @@ type StateContext = {
   onAdd: (product: ProductData, quantity: number) => void;
   toggleCartItemQuantity: (product: ProductData, value: string) => void;
   onRemove: (product: ProductData) => void;
+  setCartItems: Dispatch<SetStateAction<ProductData[]>>;
+  setTotalPrice: Dispatch<SetStateAction<number>>;
+  setTotalQuantities: Dispatch<SetStateAction<number>>;
 };
 
 const INITIAL_STATE = {
@@ -35,6 +38,9 @@ const INITIAL_STATE = {
   onAdd: (product: ProductData, quantity: number) => {},
   toggleCartItemQuantity: (product: ProductData, value: string) => {},
   onRemove: (product: ProductData) => {},
+  setCartItems: () => {},
+  setTotalPrice: () => {},
+  setTotalQuantities: () => {},
 };
 
 const Context = createContext<StateContext>(INITIAL_STATE);
@@ -148,6 +154,9 @@ export const StateContext = ({ children }: StateContextProps) => {
         onAdd,
         toggleCartItemQuantity,
         onRemove,
+        setCartItems,
+        setTotalPrice,
+        setTotalQuantities,
       }}
     >
       {children}
